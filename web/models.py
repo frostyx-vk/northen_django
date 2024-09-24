@@ -121,7 +121,7 @@ class OrderPhone(models.Model):
         EVENING = 'EVENING', 'Вечером'
         TOMORROW = 'TOMORROW', 'Завтра'
 
-    user_phone = PhoneNumberField('Контактный телефон заказчика')
+    user_phone = models.CharField('Контактный телефон заказчика', max_length=14)
     convenient_time = models.CharField('Удобное время звонка', max_length=20, choices=ConvenientTime.choices)
 
     class Meta:
@@ -129,7 +129,7 @@ class OrderPhone(models.Model):
         verbose_name_plural = 'Заказы звонка'
 
     def __str__(self):
-        return f'{self.user_phone.as_e164} - {self.convenient_time}'
+        return f'{self.user_phone} - {self.convenient_time}'
 
 
 class OrderOnline(models.Model):
@@ -140,7 +140,7 @@ class OrderOnline(models.Model):
         TEN_MILLION = 'TEN_MILLION', 'до 10 млн'
 
     description = models.TextField('Описание')
-    user_phone = PhoneNumberField('Контактный телефон заказчика')
+    user_phone = models.CharField('Контактный телефон заказчика', max_length=14)
     budget = models.CharField('Бюджет', max_length=20, choices=Budget.choices)
 
     class Meta:
